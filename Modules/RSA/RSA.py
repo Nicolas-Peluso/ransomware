@@ -1,9 +1,7 @@
-asc2Message = [];
 publicKey = [];
 privateKey = [];
 encripetedMessage = [];
-path = "/home/nicolas/Documentos/Git-Projects/Python/ransomware/FolderTesteCript/"
-import os;
+
 
 def VerificaPrimo(p, q):
     PePrimo = False;
@@ -50,46 +48,30 @@ def DivisorComum(TotN, n1):
 
 
 def EncriptaAsc2(menssagem):
+    asc2Message = [];
     for word in range(len(menssagem)):
         ascword = ord(menssagem[word]);
         asc2Message.append(ascword);
     return asc2Message;
 
 
-def Painel():
-    print("");
-    print("#_#_#_#_#_#_#_#_RSA_#_#__#_##_#__##_");
-    print("1-) Definir chaves");
-    print("2-) criptografar ");
-    print("3-) descriptografar ");
-    print("4-) sair");
+def criptografar(data):    
+        ChaveE = int(input("Digite a chave E >> "));
+        ChaveN = int(input("Digite a chave N >> "));
 
+        #Asc2EncriptedMessage = EncriptaAsc2(data);
 
-def criptografar(chaveE, chaveN):
-        #Funçaõ deve ler os bytes de um arquivo e criptografar
-        files = os.listdir(path)
-        
-        for file in files:
-            FileTo = open(path+file, "rb");
-            e = FileTo.read();
-            EncriptaAsc2(str(e[0:20]));
+        print("teste", data)
 
-            for index in len(asc2Message):
-                C = asc2Message[index] ** chaveE % chaveN;
-                encripetedMessage.append(C);
-            asc2Message = [];
+        #for letra in Asc2EncriptedMessage:
+         #   C = letra ** ChaveE % ChaveN;
+          #  encripetedMessage.append(C);
 
-            for block in encripetedMessage:
-                ArqFinal = open(path+file, "wb")
-                ArqFinal.write(str(block));
-            
-            ArqFinal.close();
-            FileTo.close();
+        return encripetedMessage;
 
 
 def descriptografar(Chave, modN):
-    #Funçaõ deve ler os bytes de um arquivo e descriptografar
-    print("Decrip")
+    print("")
 
 
 def DefinirChaves():
@@ -132,30 +114,3 @@ def DefinirChaves():
         print("Publicas: CHave E: {0}, Chave N: {1}".format(publicKey[1], publicKey[0]))
         print("privada: ", privateKey[2])
         break;
-
-
-def main():
-    while True:
-        Painel();
-        opcao = int(input(">> "));
-
-        match opcao:
-            case 1:
-                DefinirChaves();
-            case 2: 
-                    
-                    E = int(input("digite a chave publica E: "));
-                    N = int(input("digite a chave publica N: "));
-                    criptografar(E, N);
-            case 3:
-                    optDescri = int(input(">> "));
-                    Private1 = int(input("digite a chave privada: "));
-                    ModN = int(input("digite o a chave publica N (DEVE SER A CHAVE N): "));
-
-                    descriptografar(Private1, ModN);
-            case 4:
-                break;
-            case _:
-                print("opção invalida")
-
-main();
